@@ -18,8 +18,10 @@ class GUI(object):
         masterFrame.grid(column=0, row=0)
 
         unformatedMACAddress = ''
-        self.MACEntry = ttk.Entry(masterFrame, textvariable=unformatedMACAddress,
-                                  width=17)
+        
+        self.MACEntry = ttk.Entry(masterFrame,
+        textvariable=unformatedMACAddress,width=17)
+        
         MACEntry = self.MACEntry
         MACEntry.grid(column=1, row=0)
         MACEntry.focus_set()
