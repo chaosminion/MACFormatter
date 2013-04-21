@@ -67,7 +67,7 @@ class GUI(object):
         else:
             # Assumption: The last possiblity is a "-" delimited MAC
 
-            answer = unformatedMACAddress.replace("-", ":")
+            answer = five_delimiters(unformatedMACAddress)
             self.answerLabel['text'] = answer
 
         # We will be nice and copy the answer to the clipboard
@@ -112,8 +112,14 @@ def address_with_periods(unformatedMACAddress):
     MACAddress = address_with_no_delimiters(unformatedMACAddress)
     return MACAddress
 
-def four_delimiters(unformatedMACAddress):
-    pass
+def five_delimiters(unformatedMACAddress):
+    '''
+    Replace the delimiters in unformatedMACAddress with colons
+    '''
+
+    delimiter = unformatedMACAddress[2]
+    result = unformatedMACAddress.replace(delimiter, ":")
+    return result
 
 def main():
     '''
