@@ -11,114 +11,115 @@ class GUI(object):
     This class will run the GUI.
     '''
 
-    def __init__(self, myParent):
+    def __init__(self, my_parent):
 
-        self.masterFrame = ttk.Frame(myParent)
-        masterFrame = self.masterFrame
-        masterFrame.grid(column=0, row=0)
+        self.master_frame = ttk.Frame(my_parent)
+        master_frame = self.master_frame
+        master_frame.grid(column=0, row=0)
 
-        unformatedMACAddress = ''
+        unformated_mac_address = ''
         
-        self.MACEntry = ttk.Entry(masterFrame,
-        textvariable=unformatedMACAddress,width=17)
+        self.mac_entry = ttk.Entry(master_frame,
+        textvariable=unformated_mac_address,width=17)
         
-        MACEntry = self.MACEntry
-        MACEntry.grid(column=1, row=0)
-        MACEntry.focus_set()
+        mac_entry = self.mac_entry
+        mac_entry.grid(column=1, row=0)
+        mac_entry.focus_set()
 
-        self.inputLabel = ttk.Label(masterFrame, text='Enter a MAC address:')
-        inputLabel = self.inputLabel
-        inputLabel.grid(column=0, row=0)
+        self.input_label = ttk.Label(master_frame, text='Enter a MAC address:')
+        input_label = self.input_label
+        input_label.grid(column=0, row=0)
 
-        self.convertButton = ttk.Button(masterFrame, text='Convert')
-        convertButton = self.convertButton
-        convertButton['command'] = self.convert
-        convertButton.grid(column=0, row=1)
+        self.convert_button = ttk.Button(master_frame, text='Convert')
+        convert_button = self.convert_button
+        convert_button['command'] = self.convert
+        convert_button.grid(column=0, row=1)
 
-        self.convertedMAC = ttk.Label(masterFrame, text='Your converted MAC: ')
-        self.convertedMAC.grid(column=0, row=2)
+        self.converted_mac = ttk.Label(master_frame, \
+                                       text='Your converted MAC: ')
+        self.converted_mac.grid(column=0, row=2)
 
-        self.answerLabel = ttk.Label(masterFrame, text='')
-        self.answerLabel.grid(column=1, row=2)
+        self.answer_label = ttk.Label(master_frame, text='')
+        self.answer_label.grid(column=1, row=2)
 
-        self.resetButton = ttk.Button(masterFrame, text='Reset')
-        resetButton = self.resetButton
-        resetButton.grid(column=1, row=1)
-        resetButton['command'] = self.reset
+        self.reset_button = ttk.Button(master_frame, text='Reset')
+        reset_button = self.reset_button
+        reset_button.grid(column=1, row=1)
+        reset_button['command'] = self.reset
 
     def convert(self):
         '''
         Obtain user input and convert the MAC
         '''
 
-        unformatedMACAddress = self.MACEntry.get()
+        unformated_mac_address = self.mac_entry.get()
 
-        if len(unformatedMACAddress) == 12:
+        if len(unformated_mac_address) == 12:
             # The MAC is simply missing delimiters
-            answer = address_with_no_delimiters(unformatedMACAddress)
-            self.answerLabel['text'] = answer
-        elif (len(unformatedMACAddress) < 12) or (len(unformatedMACAddress) < 17):
-            self.answerLabel['text'] = 'Input must be 12 to 17 characters!'
-        elif unformatedMACAddress[4] == ".":
+            answer = address_with_no_delimiters(unformated_mac_address)
+            self.answer_label['text'] = answer
+        elif (len(unformated_mac_address) < 12) or \
+             (len(unformated_mac_address) < 17):
+            self.answer_label['text'] = 'Input must be 12 to 17 characters!'
+        elif unformated_mac_address[4] == ".":
             # The MAC is formated with two "."
 
-            answer = address_with_periods(unformatedMACAddress)
-            self.answerLabel['text'] = answer
+            answer = address_with_periods(unformated_mac_address)
+            self.answer_label['text'] = answer
         else:
             # Assumption: The last possiblity is a "-" delimited MAC
 
-            answer = five_delimiters(unformatedMACAddress)
-            self.answerLabel['text'] = answer
+            answer = five_delimiters(unformated_mac_address)
+            self.answer_label['text'] = answer
 
         # We will be nice and copy the answer to the clipboard
-        self.masterFrame.clipboard_clear()
-        self.masterFrame.clipboard_append(answer)
+        self.master_frame.clipboard_clear()
+        self.master_frame.clipboard_append(answer)
 
     def reset(self):
         '''
         Reset the GUI for another round of input.
         '''
 
-        self.MACEntry.delete(0, END)
-        self.MACEntry.focus_set()
-        self.answerLabel['text'] = ''
+        self.mac_entry.delete(0, END)
+        self.mac_entry.focus_set()
+        self.answer_label['text'] = ''
 
-def address_with_no_delimiters(unformatedMACAddress):
+def address_with_no_delimiters(unformated_mac_address):
     '''
     If the MAC has no delimiters, we just need to insert them.
     '''
     
-    MACAddress = ""
+    mac_address = ""
     counter = 0
-    placement = 0
     
     while counter < 5:
         # We need to add the : at the correct place
         
-        MACAddress += unformatedMACAddress[counter*2:(counter*2)+2] + ":"
+        mac_address += unformated_mac_address[counter*2:(counter*2)+2] + ":"
         counter += 1
 
     # Exit the loop early to prevent an extra : and add last 2 octets
-    MACAddress += unformatedMACAddress[10:13]
+    mac_address += unformated_mac_address[10:13]
 
-    return MACAddress
+    return mac_address
 
-def address_with_periods(unformatedMACAddress):
+def address_with_periods(unformated_mac_address):
     '''
     We need to strip the "."
     '''
 
-    unformatedMACAddress = unformatedMACAddress.replace(".", "", 2)
-    MACAddress = address_with_no_delimiters(unformatedMACAddress)
-    return MACAddress
+    unformated_mac_address = unformated_mac_address.replace(".", "", 2)
+    mac_address = address_with_no_delimiters(unformated_mac_address)
+    return mac_address
 
-def five_delimiters(unformatedMACAddress):
+def five_delimiters(unformated_mac_address):
     '''
-    Replace the delimiters in unformatedMACAddress with colons
+    Replace the delimiters in unformated_mac_address with colons
     '''
 
-    delimiter = unformatedMACAddress[2]
-    result = unformatedMACAddress.replace(delimiter, ":")
+    delimiter = unformated_mac_address[2]
+    result = unformated_mac_address.replace(delimiter, ":")
     return result
 
 def main():
