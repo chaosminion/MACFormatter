@@ -30,5 +30,15 @@ class TestMACFormatConverterResult(unittest.TestCase):
             self.assertFalse((len(unformatedMACAddress) > 18) and
                              (self.answerLabel['text'] != ''), 'The input is too long!')
 
+    def test_four_delimiters(self):
+        '''
+        Convert any delimiter including spaces to colins.
+        '''
+        self.result = ("00 11 22 33 44 55", "00*11*22*33*44*55")
+
+        for each in self.result:
+            self.assertTrue(len(self.result), 17)
+            self.assertTrue(self.result[2::3], "::::")
+
 if __name__ == '__main__':
     unittest.main()

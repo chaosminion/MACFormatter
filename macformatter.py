@@ -112,6 +112,9 @@ def address_with_periods(unformatedMACAddress):
     MACAddress = address_with_no_delimiters(unformatedMACAddress)
     return MACAddress
 
+def four_delimiters(unformatedMACAddress):
+    pass
+
 def main():
     '''
     This is the function constructs the interface.
