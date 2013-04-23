@@ -5,6 +5,7 @@ Python 3.3
 
 from tkinter import *
 from tkinter import ttk
+import re
 
 class GUI(object):
     '''
@@ -54,7 +55,7 @@ class GUI(object):
 
         unformated_mac_address = self.mac_entry.get()
 
-        if len(unformated_mac_address) == 12:
+        if re.search('[a-f\d]{12}]', unformated_mac_address):
             # The MAC is simply missing delimiters
             answer = address_with_no_delimiters(unformated_mac_address)
             self.answer_label['text'] = answer
