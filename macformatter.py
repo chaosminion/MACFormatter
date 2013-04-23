@@ -5,6 +5,7 @@ Python 3.3
 
 from tkinter import *
 from tkinter import ttk
+import re
 
 class GUI(object):
     '''
@@ -54,23 +55,27 @@ class GUI(object):
 
         unformated_mac_address = self.mac_entry.get()
 
-        if len(unformated_mac_address) == 12:
+        if re.search('[a-f\d]{12}', unformated_mac_address):
             # The MAC is simply missing delimiters
             answer = address_with_no_delimiters(unformated_mac_address)
             self.answer_label['text'] = answer
-        elif (len(unformated_mac_address) < 12) or \
-             (len(unformated_mac_address) < 17):
-            self.answer_label['text'] = 'Input must be 12 to 17 characters!'
+        elif re.search("([a-f\d]{2}[:\s-]){5}([a-f\d]{2})", \
+                       unformated_mac_address, re.IGNORECASE):
+            # The input has five delimiters.
+            answer = five_delimiters(unformated_mac_address)
+            self.answer_label['text'] = answer            
         elif unformated_mac_address[4] == ".":
             # The MAC is formated with two "."
 
             answer = address_with_periods(unformated_mac_address)
             self.answer_label['text'] = answer
         else:
-            # Assumption: The last possiblity is a "-" delimited MAC
+            # The input is invalid
 
-            answer = five_delimiters(unformated_mac_address)
-            self.answer_label['text'] = answer
+##            answer = five_delimiters(unformated_mac_address)
+##            self.answer_label['text'] = answer
+
+            self.answer_label['text'] = 'Input must be 12 to 17 characters!'
 
         # We will be nice and copy the answer to the clipboard
         self.master_frame.clipboard_clear()
