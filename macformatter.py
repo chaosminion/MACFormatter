@@ -71,10 +71,6 @@ class GUI(object):
             self.answer_label['text'] = answer
         else:
             # The input is invalid
-
-##            answer = five_delimiters(unformated_mac_address)
-##            self.answer_label['text'] = answer
-
             self.answer_label['text'] = 'Input must be 12 to 17 characters!'
 
         # We will be nice and copy the answer to the clipboard
