@@ -67,7 +67,6 @@ class GUI(object):
         elif re.search('([a-f\d]{4}[\.]){2}([a-f\d]{4})', \
                        unformated_mac_address, re.I):
             # The MAC is formated with two "."
-
             answer = address_with_periods(unformated_mac_address)
             self.answer_label['text'] = answer
         else:
