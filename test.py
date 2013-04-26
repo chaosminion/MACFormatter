@@ -22,7 +22,7 @@ class TestMACFormatConverterResult(unittest.TestCase):
 
     def test_address_with_periods(self):
         '''
-        Remote the two period delimiters and seperate octect pairs
+        Remove the two period delimiters and seperate octect pairs
         with colons.
         '''
         self.result = ('0011.2233.4455', 'abcd.ef01.0123')
@@ -47,14 +47,13 @@ class TestMACFormatConverterResult(unittest.TestCase):
         '''
         Convert any delimiter including spaces to colins.
         '''
-        self.test = ("00 11 22 33 44 55", "00*11*22*33*44*55")
+        self.test = ("00 11 22 33 44 55", "00*11*22*33*44*55", \
+                     "01.23.45.67.89.10")
 
 ##        import pdb; pdb.set_trace()
 
         for test in self.test:
             self.result = five_delimiters(test)
-            print('test_five_delimiters', self.result)
-            self.assertTrue(len(self.result), 17)
             self.assertTrue(self.result[2::3], "::::")
 
 if __name__ == '__main__':
