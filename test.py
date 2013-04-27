@@ -47,8 +47,8 @@ class TestMACFormatConverterResult(unittest.TestCase):
         '''
         Convert any delimiter including spaces to colins.
         '''
-##        self.test = ("00 11 22 33 44 55", "00*11*22*33*44*55", \
-##                     "01.23.45.67.89.10")
+        self.test = ("00 11 22 33 44 55", "00*11*22*33*44*55", \
+                     "01.23.45.67.89.10")
 
 ##        import pdb; pdb.set_trace()
 
