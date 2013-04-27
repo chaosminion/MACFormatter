@@ -59,7 +59,7 @@ class GUI(object):
             # The MAC is simply missing delimiters
             answer = address_with_no_delimiters(unformated_mac_address)
             self.answer_label['text'] = answer
-        elif re.search("([a-f\d]{2}[:\s-]){5}([a-f\d]{2})", \
+        elif re.search("([a-f\d]{2}[\.\s:-]){5}([a-f\d]{2})", \
                        unformated_mac_address, re.IGNORECASE):
             # The input has five delimiters.
             answer = five_delimiters(unformated_mac_address)
