@@ -18,7 +18,6 @@ class TestMACFormatConverterResult(unittest.TestCase):
             mac_address = address_with_no_delimiters(test)
             self.assertIs(len(mac_address), 17,
                           "The address is not 17 characters.")
-            print("address_with_no_delimiters", mac_address)
 
     def test_address_with_periods(self):
         '''
@@ -28,7 +27,6 @@ class TestMACFormatConverterResult(unittest.TestCase):
         self.result = ('0011.2233.4455', 'abcd.ef01.0123')
         for test in self.result:
             mac_address = address_with_periods(test)
-            print('address_with_periods', mac_address)
             self.assertIs(mac_address[2], ':', 'Incorrect delimiter detected!')
 
     def test_convert(self):
@@ -38,7 +36,6 @@ class TestMACFormatConverterResult(unittest.TestCase):
         '''
         self.result = ('0011223344556', '01234567890123456')
         for unformatedmac_address in self.result:
-            print('test_convert', unformatedmac_address)
             self.assertFalse((len(unformatedmac_address) > 18) and
                              (self.answerLabel['text'] != ''), 'The\
                              input is too long!')
@@ -49,8 +46,6 @@ class TestMACFormatConverterResult(unittest.TestCase):
         '''
         self.test = ("00 11 22 33 44 55", "00*11*22*33*44*55", \
                      "01.23.45.67.89.10")
-
-##        import pdb; pdb.set_trace()
 
         for test in self.test:
             self.result = five_delimiters(test)
