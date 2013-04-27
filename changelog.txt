@@ -1,0 +1,4 @@
+v.05
+*Fixed issue 6: Period delimited input is considered invalid.
+*Cleaned up some code
+*Introduced regexs to enhance pattern matching 
