@@ -54,6 +54,7 @@ class GUI(object):
         '''
 
         unformated_mac_address = self.mac_entry.get()
+        answer = ''
 
         if re.search('[a-f\d]{12}', unformated_mac_address):
             # The MAC is simply missing delimiters
