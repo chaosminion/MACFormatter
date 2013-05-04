@@ -1,3 +1,7 @@
+v.1
+*Added user manual
+*Fixed runtime errors
+
 v.05
 *Fixed issue 6: Period delimited input is considered invalid.
 *Cleaned up some code
