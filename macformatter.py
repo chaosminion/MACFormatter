@@ -90,6 +90,12 @@ class GUI(object):
 def address_with_no_delimiters(unformated_mac_address):
     '''
     If the MAC has no delimiters, we just need to insert them.
+
+    >>> address_with_no_delimiters("012345678910")
+    '01:23:45:67:89:10'
+    >>> 
+    >>> address_with_no_delimiters("abcdef012345")
+    'ab:cd:ef:01:23:45'
     '''
     
     mac_address = ""
