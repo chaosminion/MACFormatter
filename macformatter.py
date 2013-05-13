@@ -114,7 +114,14 @@ def address_with_no_delimiters(unformated_mac_address):
 
 def address_with_periods(unformated_mac_address):
     '''
-    We need to strip the "."
+    Strip the "." and add ":" delimiters.
+    This fuction depends on address_with_no_delimiters()
+
+    >>> address_with_periods("0123.4567.8910")
+    '01:23:45:67:89:10'
+    >>> 
+    >>> address_with_periods("abce.ef67.8910")
+    'ab:ce:ef:67:89:10'
     '''
 
     unformated_mac_address = unformated_mac_address.replace(".", "", 2)
