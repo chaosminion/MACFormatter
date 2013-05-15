@@ -131,6 +131,11 @@ def address_with_periods(unformated_mac_address):
 def five_delimiters(unformated_mac_address):
     '''
     Replace the delimiters in unformated_mac_address with colons
+
+    >>> five_delimiters("01.23.45.67.89.10")
+    '01:23:45:67:89:10'
+    >>> five_delimiters("01-23-45-67-89-10")
+    '01:23:45:67:89:10'
     '''
 
     delimiter = unformated_mac_address[2]
