@@ -48,6 +48,23 @@ class GUI(object):
         reset_button.grid(column=1, row=1)
         reset_button['command'] = self.reset
 
+    def menu(my_parent):
+        '''
+        Construct and configure the menu.
+        '''
+        def license_window():
+            '''
+            Show the user license and contact information.
+            '''
+            
+        
+        menu = Menu(my_parent)
+        my_parent.config(menu=menu)
+
+        filemenu = Menu(menu)
+        menu.add_cascade(label="Help", menu=filemenu)
+        menu.add_command(label="About", command=license_window)
+
     def convert(self):
         '''
         Obtain user input and convert the MAC
