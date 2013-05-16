@@ -31,8 +31,7 @@ class TestMACFormatConverterResult(unittest.TestCase):
 
     def test_convert(self):
         '''
-        Test the input?  This method may have to be reconsidered.
-        Is this needed?
+        Test the input.
         '''
         self.result = ('0011223344556', '01234567890123456')
         for unformatedmac_address in self.result:
@@ -50,6 +49,16 @@ class TestMACFormatConverterResult(unittest.TestCase):
         for test in self.test:
             self.result = five_delimiters(test)
             self.assertTrue(self.result[2::3], "::::")
+
+class TestGUI(unittest.TestCase):
+    '''
+    Tests for the GUI.
+    '''
+    def test_menu(self):
+        '''
+        Test menu configuration.
+        '''
+        self.assertTrue(help_menu.label, "Help")
 
 if __name__ == '__main__':
     unittest.main()
