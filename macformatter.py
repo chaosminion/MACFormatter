@@ -48,10 +48,6 @@ class GUI(object):
         reset_button.grid(column=1, row=1)
         reset_button['command'] = self.reset
 
-    def menu(my_parent):
-        '''
-        Construct and configure the menu.
-        '''
         def license_window():
             '''
             Show the user license and contact information.
@@ -80,7 +76,7 @@ class GUI(object):
 
         helpmenu = Menu(menu)
         menu.add_cascade(label="Help", menu=helpmenu)
-        menu.add_command(label="About", command=license_window)
+        helpmenu.add_command(label="About", command=license_window)
 
     def convert(self):
         '''
