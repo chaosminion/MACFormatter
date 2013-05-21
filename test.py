@@ -50,15 +50,5 @@ class TestMACFormatConverterResult(unittest.TestCase):
             self.result = five_delimiters(test)
             self.assertTrue(self.result[2::3], "::::")
 
-class TestGUI(unittest.TestCase):
-    '''
-    Tests for the GUI.
-    '''
-    def test_menu(self):
-        '''
-        Test menu configuration.
-        '''
-        self.assertTrue(help_menu.label, "Help")
-
 if __name__ == '__main__':
     unittest.main()
