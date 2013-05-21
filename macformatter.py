@@ -52,7 +52,7 @@ class GUI(object):
             '''
             Show the user license and contact information.
             '''
-            ttk.tkMessageBox.showinfo("License", "This program is free software; \
+            messagebox.showinfo("License", "This program is free software; \
                                       you can redistribute it and/or modify it under \
                                       the terms of the GNU General Public \
                                       License as published by the Free \
