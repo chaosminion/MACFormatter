@@ -59,6 +59,7 @@ class GUI(object):
         my_parent.config(menu=menu)
 
         helpmenu = Menu(menu)
+        helpmenu['tearoff'] = 0
         menu.add_cascade(label="Help", menu=helpmenu)
         helpmenu.add_command(label="About", command=license_window)
 
