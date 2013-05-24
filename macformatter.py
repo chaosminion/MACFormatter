@@ -73,17 +73,17 @@ class GUI(object):
 
         if re.search('[a-f\d]{12}', user_input):
             # The MAC is simply missing delimiters
-            answer = address_with_no_delimiters(user_input)
+            answer = add_delimiters(user_input)
             self.answer_label['text'] = answer
         elif re.search("([a-f\d]{2}[\.\s:-]){5}([a-f\d]{2})", \
                        user_input, re.IGNORECASE):
             # The input has five delimiters.
-            answer = five_delimiters(user_input)
+            answer = replace_delimters(user_input)
             self.answer_label['text'] = answer            
         elif re.search('([a-f\d]{4}[\.]){2}([a-f\d]{4})', \
                        user_input, re.I):
             # The MAC is formated with two "."
-            answer = address_with_periods(user_input)
+            answer = remove_delimiters(user_input)
             self.answer_label['text'] = answer
         else:
             # The input is invalid
@@ -102,14 +102,14 @@ class GUI(object):
         self.mac_entry.focus_set()
         self.answer_label['text'] = ''
 
-def address_with_no_delimiters(user_input):
+def add_delimiters(user_input):
     '''
     If the MAC has no delimiters, we just need to insert them.
 
-    >>> address_with_no_delimiters("012345678910")
+    >>> add_delimiters("012345678910")
     '01:23:45:67:89:10'
     >>> 
-    >>> address_with_no_delimiters("abcdef012345")
+    >>> add_delimiters("abcdef012345")
     'ab:cd:ef:01:23:45'
     '''
     
@@ -127,29 +127,29 @@ def address_with_no_delimiters(user_input):
 
     return mac_address
 
-def address_with_periods(user_input):
+def remove_delimiters(user_input):
     '''
     Strip the "." and add ":" delimiters.
-    This fuction depends on address_with_no_delimiters()
+    This fuction depends on add_delimiters()
 
-    >>> address_with_periods("0123.4567.8910")
+    >>> remove_delimiters("0123.4567.8910")
     '01:23:45:67:89:10'
     >>> 
-    >>> address_with_periods("abce.ef67.8910")
+    >>> remove_delimiters("abce.ef67.8910")
     'ab:ce:ef:67:89:10'
     '''
 
     user_input = user_input.replace(".", "", 2)
-    mac_address = address_with_no_delimiters(user_input)
+    mac_address = add_delimiters(user_input)
     return mac_address
 
-def five_delimiters(user_input):
+def replace_delimters(user_input):
     '''
     Replace the delimiters in user_input with colons
 
-    >>> five_delimiters("01.23.45.67.89.10")
+    >>> replace_delimters("01.23.45.67.89.10")
     '01:23:45:67:89:10'
-    >>> five_delimiters("01-23-45-67-89-10")
+    >>> replace_delimters("01-23-45-67-89-10")
     '01:23:45:67:89:10'
     '''
 
