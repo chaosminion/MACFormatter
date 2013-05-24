@@ -18,10 +18,10 @@ class GUI(object):
         master_frame = self.master_frame
         master_frame.grid(column=0, row=0)
 
-        unformated_mac_address = ''
+        user_input = ''
         
         self.mac_entry = ttk.Entry(master_frame,
-        textvariable=unformated_mac_address,width=17)
+        textvariable=user_input,width=17)
         
         mac_entry = self.mac_entry
         mac_entry.grid(column=1, row=0)
@@ -68,22 +68,22 @@ class GUI(object):
         Obtain user input and convert the MAC
         '''
 
-        unformated_mac_address = self.mac_entry.get()
+        user_input = self.mac_entry.get()
         answer = ''
 
-        if re.search('[a-f\d]{12}', unformated_mac_address):
+        if re.search('[a-f\d]{12}', user_input):
             # The MAC is simply missing delimiters
-            answer = address_with_no_delimiters(unformated_mac_address)
+            answer = address_with_no_delimiters(user_input)
             self.answer_label['text'] = answer
         elif re.search("([a-f\d]{2}[\.\s:-]){5}([a-f\d]{2})", \
-                       unformated_mac_address, re.IGNORECASE):
+                       user_input, re.IGNORECASE):
             # The input has five delimiters.
-            answer = five_delimiters(unformated_mac_address)
+            answer = five_delimiters(user_input)
             self.answer_label['text'] = answer            
         elif re.search('([a-f\d]{4}[\.]){2}([a-f\d]{4})', \
-                       unformated_mac_address, re.I):
+                       user_input, re.I):
             # The MAC is formated with two "."
-            answer = address_with_periods(unformated_mac_address)
+            answer = address_with_periods(user_input)
             self.answer_label['text'] = answer
         else:
             # The input is invalid
@@ -102,7 +102,7 @@ class GUI(object):
         self.mac_entry.focus_set()
         self.answer_label['text'] = ''
 
-def address_with_no_delimiters(unformated_mac_address):
+def address_with_no_delimiters(user_input):
     '''
     If the MAC has no delimiters, we just need to insert them.
 
@@ -119,15 +119,15 @@ def address_with_no_delimiters(unformated_mac_address):
     while counter < 5:
         # We need to add the : at the correct place
         
-        mac_address += unformated_mac_address[counter*2:(counter*2)+2] + ":"
+        mac_address += user_input[counter*2:(counter*2)+2] + ":"
         counter += 1
 
     # Exit the loop early to prevent an extra : and add last 2 octets
-    mac_address += unformated_mac_address[10:13]
+    mac_address += user_input[10:13]
 
     return mac_address
 
-def address_with_periods(unformated_mac_address):
+def address_with_periods(user_input):
     '''
     Strip the "." and add ":" delimiters.
     This fuction depends on address_with_no_delimiters()
@@ -139,13 +139,13 @@ def address_with_periods(unformated_mac_address):
     'ab:ce:ef:67:89:10'
     '''
 
-    unformated_mac_address = unformated_mac_address.replace(".", "", 2)
-    mac_address = address_with_no_delimiters(unformated_mac_address)
+    user_input = user_input.replace(".", "", 2)
+    mac_address = address_with_no_delimiters(user_input)
     return mac_address
 
-def five_delimiters(unformated_mac_address):
+def five_delimiters(user_input):
     '''
-    Replace the delimiters in unformated_mac_address with colons
+    Replace the delimiters in user_input with colons
 
     >>> five_delimiters("01.23.45.67.89.10")
     '01:23:45:67:89:10'
@@ -153,8 +153,8 @@ def five_delimiters(unformated_mac_address):
     '01:23:45:67:89:10'
     '''
 
-    delimiter = unformated_mac_address[2]
-    result = unformated_mac_address.replace(delimiter, ":")
+    delimiter = user_input[2]
+    result = user_input.replace(delimiter, ":")
     return result
 
 def main():
