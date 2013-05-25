@@ -17,7 +17,7 @@ class GUI(object):
         self.master_frame = ttk.Frame(my_parent)
         master_frame = self.master_frame
         master_frame.grid(column=0, row=0)
-
+                
         user_input = ''
         
         self.mac_entry = ttk.Entry(master_frame,
@@ -87,7 +87,9 @@ class GUI(object):
             self.answer_label['text'] = answer
         else:
             # The input is invalid
-            self.answer_label['text'] = 'Input must be 12 to 17 characters!'
+            messagebox.showwarning('Invalid input', \
+                                   'Input must be 12 to 17 characters!')
+            self.mac_entry.focus_set()
 
         # We will be nice and copy the answer to the clipboard
         self.master_frame.clipboard_clear()
@@ -163,6 +165,7 @@ def main():
     '''
 
     root = Tk()
+    root.title("MACFormatter v.15")
     interface = GUI(root)
     root.mainloop()
 
