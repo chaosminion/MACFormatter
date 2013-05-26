@@ -1,3 +1,8 @@
+v.15
+*Updated error message and added a title
+*Added license and contact information
+*Created user manual
+
 v.1
 *Added user manual
 *Fixed runtime errors
